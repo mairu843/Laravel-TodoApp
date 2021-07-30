@@ -221,9 +221,24 @@
                     </tr>
                     <tr>
                         <td>日付</td>
-                        <td>
-                            {{$items}}
-                        </td>
+                        @foreach ($items as $item)
+                            <td>
+                                <input type="text" name="text-update" value="{{$item->getData()}}">
+                                @break
+                            </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>日付</td>
+                        @foreach ($items as $item)
+                            <td>
+                                @if (count($items) == 5) {
+                                    <input type="text" name="text-update" value="{{$item->getData()}}">
+                                    @break
+                                }
+                                @endif
+                            </td>
+                        @endforeach
                     </tr>
                 </table>
             </div>

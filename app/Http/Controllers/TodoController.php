@@ -13,11 +13,27 @@ class TodoController extends Controller
         // $form = Content::with('content')->get();
         // return view('index', ['items' => $form]);
 
-        // $form = $request->all();
-        // $items = Content::where('content', $request->content)->update($form);
+        // $items = Content::where('content', $request->content)->first();
+        // ↑コレを直す
+
+        // $param = [
+        //     'input' => $request->input,
+        //     'content' => $items
+        // ];
+        // return view('index', $param);
+
+        // $item = Content::find($request->input);
+        // $param = [
+        //     'input' => $request->input,
+        //     'item' => $item
+        // ];
+        // return view('index', $param);
 
         $items = Content::all();
         return view('index', ['items' => $items]);
+
+        // $items = Content::all();
+        // return view('index', ['items' => $param]);
     }
 
     public function add(Request $request)

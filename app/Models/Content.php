@@ -18,6 +18,7 @@ class Content extends Model
 
     public function getData()
     {
-        return $this->content;
+        $txt = $this->content;
+        return $txt;
     }
 }
