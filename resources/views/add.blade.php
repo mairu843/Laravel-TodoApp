@@ -183,13 +183,24 @@
                         <th>更新</th>
                         <th>削除</th>
                     </tr>
-                    <tr>
+                    {{-- <tr>
+                        <td>今日</td>
+                        <td>
+                            @foreach ($items as $item)
+                                <input type="text" name="text-update" class="text-update" value="{{$item->getData()}}">
+                            @endforeach
+                        </td>
+                        <td>更新</td>
+                        <td>削除</td>
+                    </tr> --}}
+
+
+                    {{-- <tr>
                         <td>日付</td>
                         <form action="/todo/create" method="POST">@csrf</form>
                         <input type="hidden">
                         <td>
-                            {{$items->getData()}}
-                        {{-- <input type="text" name="content" class="text-update" value="{{$form->content}}"> --}}
+                            <input type="text" name="content" class="text-update" value="{{$form->getData()}}">
                         </td>
                         <td>
                             <button class="button-update">更新</button>
@@ -201,7 +212,8 @@
                                 <button class="button-delete">削除</button>
                             </form>
                         </td>
-                    </tr>
+                    </tr> --}}
+
                 </table>
             </div>
         </div>

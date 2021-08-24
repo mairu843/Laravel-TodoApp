@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/', [TodoController::class, 'index']);
+
 Route::get('/todo/create', [TodoController::class, 'add']);
 Route::post('/todo/create', [TodoController::class, 'create']);
 Route::get('/todo/update', [TodoController::class, 'edit']);

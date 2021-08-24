@@ -191,7 +191,7 @@
             text-align: center;
         }
         tr {
-            height: 50px;
+            height: 60px;
         }
     </style>
 </head>
@@ -212,7 +212,7 @@
                 <form action="/todo/create" method="POST" class="flex">
                     @csrf
                     <input type="hidden">
-                    <input type="text" name="content" class="text-add" maxlength="20" required>
+                    <input type="text" name="content" class="text-add">
                     <input type="submit" value="追加" class="submit-add">
                 </form>
                 <table>
@@ -222,27 +222,22 @@
                         <th>更新</th>
                         <th>削除</th>
                     </tr>
-                    @foreach($items as $item)
+                    @foreach ((array)$items as $item)
                         <tr>
                             <td>
                                 {{$item->getCreatedAt()}}
+                                <form action="/todo/update" method="POST">@csrf
+                                <input type="hidden">
                             </td>
                             <td>
                                 <input type="text" name="text-update" class="text-update" value="{{$item->getData()}}">
                             </td>
-                            <td>
-                                <form action="/todo/update" method="POST">
-                                    @csrf
-                                    <input type="hidden">
-                                    <button class="submit-update">更新</button>
-                                </form>
-                            </td>
+                            <td><button class="submit-update">更新</button></form></td>
                             <td>
                                 <form action="/todo/delete" method="POST">
                                     @csrf
                                     <input type="hidden">
                                     <button class="submit-delete">削除</button>
-                                    {{-- <input type="submit" class="submit-delete" value="削除"> --}}
                                 </form>
                             </td>
                         </tr>

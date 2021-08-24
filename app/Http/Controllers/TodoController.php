@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Content;
+use Carbon\Carbon;
 
 class TodoController extends Controller
 {
@@ -12,9 +14,6 @@ class TodoController extends Controller
         // $form = DB::table('contens')->where('content', $content)->first;
         // $form = Content::with('content')->get();
         // return view('index', ['items' => $form]);
-
-        // $items = Content::where('content', $request->content)->first();
-        // ↑コレを直す
 
         // $param = [
         //     'input' => $request->input,
@@ -29,11 +28,30 @@ class TodoController extends Controller
         // ];
         // return view('index', $param);
 
-        $items = Content::all();
-        return view('index', ['items' => $items]);
+        // $items = Content::all();
+        // $date = Carbon::createFromFormat('Y-m-d H:i:s', $model->created_at)->format('Y-m-d');
+        // $date = DB::table('contents')->where('created_at', 1)->first();
+        // $date = DB::table('contents');
+        // $miso = [
+        //     'items' => $items,
+        //     'date' => $date
+        // ];
+
+        // $items = Content::select('content')->get();
+        // return view('index', ['items' => $items]);
 
         // $items = Content::all();
         // return view('index', ['items' => $param]);
+
+        // $query = Content::query();
+        // $query->where('id', 1);
+        // $posts = $query->get();
+        // return view('index', ['items' => $posts]);
+        // ↑idの1番目の情報をすべてを取得し表示
+
+        $items = Content::all();
+        return view('index', ['items' => $items]);
+        // ↑contentのすべてを取得し表示
     }
 
     public function add(Request $request)
@@ -55,13 +73,13 @@ class TodoController extends Controller
     public function edit(Request $request)
     {
         $content = Content::find($request->id);
-        return view('/todo/update');
+        return view('/todo/update', ['items' => $content]);
     }
     public function update(Request $request)
     {
         $this->validate($request, Content::$rules);
         $form = $request->all();
-        $form = $request->except(['_token']);
+        // $form = $request->except(['_token']);
         unset($form['_token']);
         Content::where('id', $request->id)->update($form);
         return redirect('/');
@@ -69,6 +87,20 @@ class TodoController extends Controller
 
     public function delete(Request $request)
     {
-        return view('/');
+        $content = Content::find($request->id);
+        return view('/todo/delete', ['items' => $content]);
     }
+    public function remove(Request $request)
+    {
+        $content = Content::find($request->id);
+        $content->delete();
+        return redirect('/');
+    }
+
+    // public function delete(Request $request)
+    // {
+    //     $content = Content::find($request->id);
+    //     $content->delete();
+    //     return redirect('/');
+    // }
 }

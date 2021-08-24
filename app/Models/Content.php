@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Content extends Model
 {
@@ -20,5 +21,9 @@ class Content extends Model
     {
         $txt = $this->content;
         return $txt;
+    }
+    public function getCreatedAt()
+    {
+        return new Carbon($this->created_at);
     }
 }
