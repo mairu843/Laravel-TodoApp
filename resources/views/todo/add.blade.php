@@ -123,6 +123,15 @@
             font-size: 14px;
             outline: none;
         }
+        .text-update {
+            width: 90%;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            appearance: none;
+            font-size: 14px;
+            outline: none;
+        }
         .submit-add {
             text-align: left;
             border: 2px solid #dc70fa;
@@ -141,66 +150,18 @@
             border-color: #dc70fa;
             color: #fff;
         }
-        .text-update {
-            width: 90%;
-            padding: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            appearance: none;
-            font-size: 14px;
-            outline: none;
-        }
-        .submit-update {
-            text-align: left;
-            border: 2px solid #fa9770;
-            font-size: 12px;
-            color: #fa9770;
-            background-color: #fff;
-            font-weight: bold;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.4s;
-            outline: none;
-        }
-        .submit-update:hover {
-            background-color: #fa9770;
-            border-color: #fa9770;
-            color: #fff;
-        }
-        .submit-delete {
-        text-align: left;
-        border: 2px solid #71fadc;
-        font-size: 12px;
-        color: #71fadc;
-        background-color: #fff;
-        font-weight: bold;
-        padding: 8px 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 0.4s;
-        outline: none;
-        }
-        .submit-delete:hover {
-            background-color: #71fadc;
-            border-color: #71fadc;
-            color: #fff;
-        }
         table {
             width: 100%;
             text-align: center;
-        }
-        tr {
-            height: 50px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="card">
-            <h2>Todo List</h2>
+            <h2>Todo List create-page</h2>
             <div class="todo">
-                {{-- @if (count($errors) > 0)
+                @if (count($errors) > 0)
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>
@@ -208,11 +169,11 @@
                             </li>
                         @endforeach
                     </ul>
-                @endif --}}
+                @endif
                 <form action="/todo/create" method="POST" class="flex">
                     @csrf
                     <input type="hidden">
-                    <input type="text" name="content" class="text-add" maxlength="20" required>
+                    <input type="text" name="content" class="text-add">
                     <input type="submit" value="追加" class="submit-add">
                 </form>
                 <table>
@@ -227,18 +188,20 @@
                             <td>
                                 {{$item->getCreatedAt()}}
                             </td>
-                            <form action="{{ route('todo.update', ['id' => Content::user()->id]) }}" method="POST">
-                            @csrf
                             <td>
                                 <input type="text" name="text-update" class="text-update" value="{{$item->getData()}}">
                             </td>
                             <td>
-                                <button class="submit-update">更新</button>
+                                <form action="/todo/update" method="POST">
+                                    @csrf
+                                    <input type="hidden">
+                                    <button class="submit-update">更新</button>
                                 </form>
                             </td>
                             <td>
                                 <form action="/todo/delete" method="POST">
                                     @csrf
+                                    <input type="hidden">
                                     <button class="submit-delete">削除</button>
                                     {{-- <input type="submit" class="submit-delete" value="削除"> --}}
                                 </form>
