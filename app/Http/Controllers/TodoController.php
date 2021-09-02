@@ -49,8 +49,16 @@ class TodoController extends Controller
         // return view('index', ['items' => $posts]);
         // ↑idの1番目の情報をすべてを取得し表示
 
+        // $content = Content::all();
+        // dd($content);
+        // return response()->json([
+        //     'posts' => $content
+        // ]);
+        // ↑デバッグ「https://qiita.com/1rohas/items/ba596b57d6027cc21166」
+
         $items = Content::all();
-        return view('index', ['items' => $items]);
+        return view('index', compact('items'));
+        // return view('index', ['items' => $items]);
         // ↑contentのすべてを取得し表示
     }
 
@@ -72,8 +80,12 @@ class TodoController extends Controller
 
     public function edit(Request $request)
     {
+        // $id = $request->id;
+        // var_dump($id);
+        // die;
+
         $content = Content::find($request->id);
-        return view('/todo/update', ['items' => $content]);
+        return view('edit', ['items' => $content]);
     }
     public function update(Request $request)
     {
@@ -83,12 +95,17 @@ class TodoController extends Controller
         Content::where('id', $request->id)->update($form);
         // Content::find($request->id)->fill($form)->save();
         return redirect('/');
+
+        // $content = Content::find($request->id);
+        // $content->content = $request->content;
+        // $content->save();
+        // return redirect('/');
     }
 
     public function delete(Request $request)
     {
         $content = Content::find($request->id);
-        return view('/todo/delete', ['items' => $content]);
+        return view('delete', ['items' => $content]);
     }
     public function remove(Request $request)
     {

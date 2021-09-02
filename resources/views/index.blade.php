@@ -227,7 +227,7 @@
                             <td>
                                 {{$item->getCreatedAt()}}
                             </td>
-                            <form action="{{ route('todo.update', ['id' => Content::user()->id]) }}" method="POST">
+                            <form action="{{ route('todo.update', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             <td>
                                 <input type="text" name="text-update" class="text-update" value="{{$item->getData()}}">

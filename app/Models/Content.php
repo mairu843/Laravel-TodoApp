@@ -26,4 +26,8 @@ class Content extends Model
     {
         return new Carbon($this->created_at);
     }
+    public function getId()
+    {
+        return $this->id;
+    }
 }
