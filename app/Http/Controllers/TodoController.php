@@ -113,11 +113,4 @@ class TodoController extends Controller
         $content->delete();
         return redirect('/');
     }
-
-    // public function delete(Request $request)
-    // {
-    //     $content = Content::find($request->id);
-    //     $content->delete();
-    //     return redirect('/');
-    // }
 }

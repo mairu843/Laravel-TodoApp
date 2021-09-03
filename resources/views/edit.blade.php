@@ -238,7 +238,7 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="/todo/delete" method="POST">
+                                <form action="{{ route('todo.delete', ['id' => $item->id]) }}" method="POST">
                                     @csrf
                                     <button class="submit-delete">削除</button>
                                     {{-- <input type="submit" class="submit-delete" value="削除"> --}}
